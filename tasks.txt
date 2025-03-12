@@ -1,0 +1,33 @@
+>>> 
+   have oath credentials >> have them in a .env file >>> write the auth handler inside app/auth/[...nextAuth]/route.ts
+
+for now >> have a singleTon file , install zod , start writing  the route.ts inside the streams >> 
+
+changes --
+ >> have url and extractedId inside the stream , both are String>> 
+ >> have a folder inside the app "streams" ,where have a route.ts file that will have the post method to add a stream 
+steps >>
+ >> add fields to stream model -- title , smallImg, bigImg 
+
+1 > design the schema [  
+   key points i) what are the models ?? [user,stream,upvote,streamType,provider] 
+              ii) 
+]
+
+frontend >> 
+          add NEXTAUTH_SECRET in the env variables >> 
+          put secret in nextauth's route.ts >> 
+          
+          make the code of the dashboard shifted to another comonent and put that component in the dashboard >> 
+          fix the strams/my endpoint >> 
+          fix the sharing stuff > 
+          make sure other user can upvote and stuff 
+            
+
+
+
+803717aa-b00b-4907-99ba-880a91e1fa3d
+803717aa-b00b-4907-99ba-880a91e1fa3d
+
+
+the iframe's replacement doesnt work .. the first video works well and then it crashed out ... 
