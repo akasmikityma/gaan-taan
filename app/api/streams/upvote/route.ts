@@ -1,4 +1,5 @@
 import DBClient from "@/lib/db";
+// import { error } from "console";
 import { getServerSession } from "next-auth";
 import {NextRequest,NextResponse} from "next/server"
 import {z} from "zod";
@@ -31,11 +32,13 @@ export async function POST(req:NextRequest){
             }
         })
         return NextResponse.json({
-            message:"a upvote is created"
+            message:"a upvote is created",
+            result:res
         })
     }catch(err){
         return NextResponse.json({
-            message:"Error while upvoting, try again"
+            message:"Error while upvoting, try again",
+            error:err
         },{
             status:403
         })

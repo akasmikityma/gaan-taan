@@ -1,7 +1,7 @@
 import GoogleProvider from "next-auth/providers/google";
 import NextAuth, { DefaultSession } from "next-auth";
-import Email from "next-auth/providers/email";
-import { Provider } from "@prisma/client";
+// import Email from "next-auth/providers/email";
+// import { Provider } from "@prisma/client";
 import DBClient from "@/lib/db";
 // import { NextRequest } from "next/server";
 const prisma = DBClient.getInstance().prisma

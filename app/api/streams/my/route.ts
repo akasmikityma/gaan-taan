@@ -2,9 +2,10 @@ import { getServerSession } from "next-auth";
 import DBClient from "@/lib/db";
 import { NextResponse } from "next/server";
 const prisma = DBClient.getInstance().prisma;
+
 export async function GET(req:Request){
     const session =await  getServerSession();
-
+    console.log(req)
     // get the user and then if not user ,return some errorous response else find all the streams and return 
     const user = await prisma.user.findFirst({
         where:{

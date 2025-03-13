@@ -1,7 +1,7 @@
 import DBClient from "@/lib/db";
 import { NextRequest, NextResponse } from "next/server";
-import {z} from "zod"
-//@ts-ignore
+import { z } from "zod";
+// @ts-expect-error: ytSearchApi has no types available
 import ytSearchApi from "youtube-search-api";
 import { getServerSession } from "next-auth";
 

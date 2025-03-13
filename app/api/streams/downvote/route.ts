@@ -33,11 +33,13 @@ export async function POST(req:NextRequest){
             }
         })
         return NextResponse.json({
-            message:"u downVoted"
+            message:"u downVoted",
+            result:res
         })
     }catch(err){
         return NextResponse.json({
-            message:"Error while upvoting, try again"
+            message:"Error while upvoting, try again",
+            error:err
         },{
             status:403
         })

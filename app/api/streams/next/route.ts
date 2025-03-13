@@ -1,6 +1,6 @@
 import DBClient from "@/lib/db";
 import { getServerSession } from "next-auth";
-import { NextResponse,NextRequest } from "next/server";
+import { NextResponse } from "next/server";
 const prisma = DBClient.getInstance().prisma
 
 export async function GET(){

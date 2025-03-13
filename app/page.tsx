@@ -80,7 +80,7 @@ export default function LandingPage() {
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">Features You'll Love</h2>
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">Features You&apos;ll Love</h2>
                 <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
                   Everything you need to create the perfect shared music experience with friends, family, or colleagues.
                 </p>
@@ -180,8 +180,8 @@ export default function LandingPage() {
                       />
                       <div>
                         <p className="text-sm text-muted-foreground italic">
-                          "GroupBeats made planning music for our road trip so much easier. Everyone got to add their
-                          favorites, and we discovered new music together!"
+                        &quot;GroupBeats made planning music for our road trip so much easier. Everyone got to add their
+                          favorites, and we discovered new music together!&quot;
                         </p>
                         <p className="mt-2 text-sm font-medium">Sarah K.</p>
                       </div>
@@ -198,8 +198,8 @@ export default function LandingPage() {
                       />
                       <div>
                         <p className="text-sm text-muted-foreground italic">
-                          "We use GroupBeats for our office playlists. It's democratic and keeps everyone happy with the
-                          music selection during work hours."
+                        &quot;We use GroupBeats for our office playlists. It&apos;s democratic and keeps everyone happy with the
+                          music selection during work hours.&quot;
                         </p>
                         <p className="mt-2 text-sm font-medium">Michael T.</p>
                       </div>
