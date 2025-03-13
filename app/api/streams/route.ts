@@ -30,12 +30,12 @@ export async function POST(req: NextRequest) {
 
     const res = await ytSearchApi.GetVideoDetails(extractedId);
 
-    if (!res || !res.title || !res.thumbnail || !res.thumbnail.thumbnails) {
+    if (!res || !res.title) {
       console.log("Invalid API response:", res);
       return NextResponse.json({ message: "Invalid video data from YouTube" }, { status: 500 });
     }
 
-    const thumbnails = res.thumbnail.thumbnails;
+    const thumbnails = res.thumbnail?.thumbnails || [];
     thumbnails.sort((a: { width: number }, b: { width: number }) => (a.width < b.width ? -1 : 1));
     
     const existingActiveStream = await prisma.stream.count({
@@ -76,44 +76,6 @@ export async function POST(req: NextRequest) {
   }
 }
 
-// export async function GET(req:NextRequest){
-//    try{
-//     const creatorId = req.nextUrl.searchParams.get("creatorId");
-//     if(!creatorId){
-//         return NextResponse.json({
-//            message:"Error" 
-//         },{
-//             status:411
-//         })
-//     }
-//     const streams = await prisma.stream.findMany({
-//            where:{
-//                userId:creatorId
-//            },
-//            include:{
-//                _count:{
-//                    select:{
-//                        upvotes:true
-//                    }
-//                },
-//                upvotes:{
-//                    where:{
-//                        userId:creatorId
-//                    }
-//                }
-//            }
-//        })
-//        return NextResponse.json({
-//            streams: streams.map(({_count,...rest})=>({
-//                ...rest,
-//                upvotes:_count.upvotes,
-//                hasUpvoted : rest.upvotes.length?true:false
-//            }))
-//        })
-//    }catch(err){
-//     console.log(err)
-//    }
-// }
 export async function GET(req: NextRequest) {
   try {
       const creatorId = req.nextUrl.searchParams.get("creatorId");
