@@ -37,6 +37,21 @@ export async function POST(req: NextRequest) {
 
     const thumbnails = res.thumbnail.thumbnails;
     thumbnails.sort((a: { width: number }, b: { width: number }) => (a.width < b.width ? -1 : 1));
+    
+    const existingActiveStream = await prisma.stream.count({
+      where:{
+        userId:data.creatorId,
+        played:false
+      }
+    })
+
+    if(existingActiveStream){
+      return NextResponse.json({
+        message:"You already have an active stream"
+      },{
+        status:411
+      })
+    }   
 
     const stream = await prisma.stream.create({
       data: {
