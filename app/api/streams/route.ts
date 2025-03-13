@@ -29,6 +29,7 @@ export async function POST(req: NextRequest) {
     }
 
     const res = await ytSearchApi.GetVideoDetails(extractedId);
+    console.log("YouTube API response:", res);
 
     if (!res || !res.title) {
       console.log("Invalid API response:", res);
@@ -71,7 +72,7 @@ export async function POST(req: NextRequest) {
       upvotes: 0,
     });
   } catch (err) {
-    console.error(err);
+    console.error("Error in POST /api/streams:", err);
     return NextResponse.json({ message: "Error while adding a stream" }, { status: 500 });
   }
 }
