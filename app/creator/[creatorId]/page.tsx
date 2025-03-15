@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from "react";
 import StreamView from "@/app/comps/StreamView";
 
 async function fetchCreatorId(params: Promise<{ creatorId: string }>) {
@@ -14,13 +14,11 @@ export default function CreatorPage({ params }: { params: Promise<{ creatorId: s
         fetchCreatorId(params).then(setCreatorId);
     }, [params]);
 
-    if (!creatorId) {
-        return <div>Loading...</div>;
-    }
+    // Memoize the StreamView component to prevent unnecessary re-renders
+    const streamView = useMemo(() => {
+        if (!creatorId) return <div>Loading...</div>;
+        return <StreamView creatorId={creatorId} playVideo={false} />;
+    }, [creatorId]);
 
-    return (
-        <div>
-            <StreamView creatorId={creatorId} playVideo={false} />
-        </div>
-    );
+    return <div>{streamView}</div>;
 }
