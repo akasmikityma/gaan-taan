@@ -61,8 +61,8 @@ export async function POST(req: NextRequest) {
         extractedId,
         type: "YouTube",
         title: res.title ?? "Can't find the video",
-        smallImg: thumbnails.length > 1 ? thumbnails[thumbnails.length - 2].url : thumbnails[thumbnails.length - 1].url,
-        bigImg: thumbnails[thumbnails.length - 1]?.url ?? "",
+        smallImg: thumbnails.length > 1 ? thumbnails[thumbnails.length - 2].url : thumbnails[thumbnails.length - 1].url ?? "https://cdn.pixabay.com/photo/2024/02/28/07/42/european-shorthair-8601492_640.jpg",
+        bigImg: thumbnails[thumbnails.length - 1]?.url ?? "https://cdn.pixabay.com/photo/2024/02/28/07/42/european-shorthair-8601492_640.jpg",
       },
     });
 
