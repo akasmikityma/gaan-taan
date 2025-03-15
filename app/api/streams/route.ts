@@ -18,41 +18,64 @@ const CreateStreamSchema = z.object({
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    console.log(body);
+    console.log("Request body:", body);
 
     const data = CreateStreamSchema.parse(body);
+
+    // Validate creatorId
+    const user = await prisma.user.findUnique({
+      where: { id: data.creatorId },
+    });
+
+    if (!user) {
+      console.error("Invalid creatorId: User does not exist");
+      return NextResponse.json(
+        { message: "Invalid creatorId: User does not exist" },
+        { status: 400 }
+      );
+    }
+
     const match = data.url.match(YT_REGEX);
     const extractedId = match ? match[1] : null;
 
     if (!extractedId) {
-      return NextResponse.json({ message: "Invalid YouTube URL" }, { status: 400 });
+      console.error("Invalid YouTube URL");
+      return NextResponse.json(
+        { message: "Invalid YouTube URL" },
+        { status: 400 }
+      );
     }
 
     const res = await ytSearchApi.GetVideoDetails(extractedId);
     console.log("YouTube API response:", res);
 
     if (!res || !res.title) {
-      console.log("Invalid API response:", res);
-      return NextResponse.json({ message: "Invalid video data from YouTube" }, { status: 500 });
+      console.error("Invalid video data from YouTube:", res);
+      return NextResponse.json(
+        { message: "Invalid video data from YouTube" },
+        { status: 500 }
+      );
     }
 
     const thumbnails = res.thumbnail?.thumbnails || [];
-    thumbnails.sort((a: { width: number }, b: { width: number }) => (a.width < b.width ? -1 : 1));
-    
-    const existingActiveStream = await prisma.stream.count({
-      where:{
-        userId:data.creatorId,
-        played:false
-      }
-    })
+    thumbnails.sort((a: { width: number }, b: { width: number }) =>
+      a.width < b.width ? -1 : 1
+    );
 
-    if(existingActiveStream){
-      return NextResponse.json({
-        message:"You already have an active stream"
-      },{
-        status:411
-      })
-    }   
+    const existingActiveStream = await prisma.stream.count({
+      where: {
+        userId: data.creatorId,
+        played: false,
+      },
+    });
+
+    if (existingActiveStream) {
+      console.error("User already has an active stream");
+      return NextResponse.json(
+        { message: "You already have an active stream" },
+        { status: 411 }
+      );
+    }
 
     const stream = await prisma.stream.create({
       data: {
@@ -61,8 +84,14 @@ export async function POST(req: NextRequest) {
         extractedId,
         type: "YouTube",
         title: res.title ?? "Can't find the video",
-        smallImg: thumbnails.length > 1 ? thumbnails[thumbnails.length - 2].url : thumbnails[thumbnails.length - 1].url ?? "https://cdn.pixabay.com/photo/2024/02/28/07/42/european-shorthair-8601492_640.jpg",
-        bigImg: thumbnails[thumbnails.length - 1]?.url ?? "https://cdn.pixabay.com/photo/2024/02/28/07/42/european-shorthair-8601492_640.jpg",
+        smallImg:
+          thumbnails.length > 1
+            ? thumbnails[thumbnails.length - 2].url
+            : thumbnails[thumbnails.length - 1]?.url ??
+              "https://cdn.pixabay.com/photo/2024/02/28/07/42/european-shorthair-8601492_640.jpg",
+        bigImg:
+          thumbnails[thumbnails.length - 1]?.url ??
+          "https://cdn.pixabay.com/photo/2024/02/28/07/42/european-shorthair-8601492_640.jpg",
       },
     });
 
@@ -73,7 +102,10 @@ export async function POST(req: NextRequest) {
     });
   } catch (err) {
     console.error("Error in POST /api/streams:", err);
-    return NextResponse.json({ message: "Error while adding a stream" }, { status: 500 });
+    return NextResponse.json(
+      { message: "Error while adding a stream" },
+      { status: 500 }
+    );
   }
 }
 
