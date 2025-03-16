@@ -88,10 +88,10 @@ export async function POST(req: NextRequest) {
           thumbnails.length > 1
             ? thumbnails[thumbnails.length - 2].url
             : thumbnails[thumbnails.length - 1]?.url ??
-              "https://cdn.pixabay.com/photo/2024/02/28/07/42/european-shorthair-8601492_640.jpg",
+              "https://media.istockphoto.com/id/1431567498/vector/vector-illustration-of-musical-notes-on-white-background.jpg?s=612x612&w=0&k=20&c=E4Qx8E7OJm-itMPylpaZhNIU8mkJQt5XctWlKLLa1I8=",
         bigImg:
           thumbnails[thumbnails.length - 1]?.url ??
-          "https://cdn.pixabay.com/photo/2024/02/28/07/42/european-shorthair-8601492_640.jpg",
+          "https://media.istockphoto.com/id/1431567498/vector/vector-illustration-of-musical-notes-on-white-background.jpg?s=612x612&w=0&k=20&c=E4Qx8E7OJm-itMPylpaZhNIU8mkJQt5XctWlKLLa1I8=",
       },
     });
 

@@ -447,7 +447,9 @@ export default function StreamView({
             <CardContent>
               <div className="aspect-video bg-muted/30 flex items-center justify-center border rounded-lg">
                 {currentVideo ? (
-                  <div ref={videoPlayerRef} className="w-full h-full" />
+                  <div className="w-full h-full">
+                   <div ref={videoPlayerRef} key={"bishal"} className="w-full h-full" />
+                 </div>
                 ) : (
                   <p className="text-center py-8 text-gray-400">No video playing</p>
                 )}
