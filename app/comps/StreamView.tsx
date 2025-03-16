@@ -263,9 +263,8 @@ import { useEffect, useRef, useState, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Share2, PlayCircle, MoreVertical, ThumbsUp, ThumbsDown } from "lucide-react";
+import { Share2, PlayCircle, ThumbsUp, ThumbsDown } from "lucide-react";
 import { toast, ToastContainer } from "react-toastify";
-// @ts-expect-error: YouTubePlayer has no types available
 import YouTubePlayer from "youtube-player";
 import Image from "next/image";
 
@@ -297,6 +296,7 @@ export default function StreamView({
   const [currentVideo, setCurrentVideo] = useState<Video | null>(null);
   const [playNextLoader, setPlayNextLoader] = useState(false);
   const videoPlayerRef = useRef<HTMLDivElement>(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const playerRef = useRef<any>(null);
 
   const refreshStreams = useCallback(async () => {
