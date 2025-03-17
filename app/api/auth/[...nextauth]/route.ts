@@ -1,8 +1,6 @@
-import GoogleProvider from "next-auth/providers/google";
-import NextAuth, { DefaultSession } from "next-auth";
-import Email from "next-auth/providers/email";
-import { Provider } from "@prisma/client";
 import DBClient from "@/lib/db";
+import NextAuth, { DefaultSession } from "next-auth";
+import GoogleProvider from "next-auth/providers/google";
 // import { NextRequest } from "next/server";
 const prisma = DBClient.getInstance().prisma
 
@@ -74,4 +72,5 @@ const handler = NextAuth({
     }
 })
 
-export {handler as GET , handler as POST}
+export { handler as GET, handler as POST };
+

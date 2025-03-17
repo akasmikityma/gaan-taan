@@ -1,9 +1,9 @@
 // import React from 'react'
 "use client"
-import { signIn, signOut, useSession } from "next-auth/react"
-import { Music, Users, Share2, Headphones, PlayCircle, ChevronRight, ArrowRight } from "lucide-react"
-import Link from "next/link"
 import { Button } from "@/components/ui/button"
+import { Music } from "lucide-react"
+import { signIn, signOut, useSession } from "next-auth/react"
+import Link from "next/link"
 const Appbar = () => {
   const session = useSession();
   const getIn=()=>{

@@ -14,15 +14,28 @@
 //     </div>
 // }
 "use client";
-import { use } from 'react';
 import StreamView from "@/app/comps/StreamView";
+import { useEffect, useState } from 'react';
 
-export default function ({ params }: { params: { creatorId: string } }) {
-    const { creatorId } = params; // Unwrap the params Promise
+async function fetchCreatorId(params: Promise<{ creatorId: string }>) {
+    const { creatorId } = await params;
+    return creatorId;
+}
 
+export default function CreatorPage({ params }: { params: Promise<{ creatorId: string }> }) {
+    const [creatorId, setCreatorId] = useState<string | null>(null);
+
+    useEffect(() => {
+        fetchCreatorId(params).then(setCreatorId);
+    }, [params]);
+
+    if (!creatorId) {
+        return <div>Loading...</div>;
+    }
     return (
         <div>
-            <StreamView creatorId={creatorId} playVideo={false}/>
+            {/* <StreamView creatorId={creatorId} playVideo={false}/> */}
+            <StreamView creatorId={creatorId} playVideo={false} />
         </div>
     );
 }

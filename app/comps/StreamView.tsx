@@ -1,10 +1,10 @@
 "use client"
-import { useEffect, useRef, useState } from "react"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Share2, PlayCircle, Music, MoreVertical, ThumbsUp, ThumbsDown } from "lucide-react"
-import {toast,ToastContainer} from "react-toastify"
+import { Input } from "@/components/ui/input"
+import { MoreVertical, PlayCircle, Share2, ThumbsDown, ThumbsUp } from "lucide-react"
+import { useEffect, useRef, useState } from "react"
+import { toast, ToastContainer } from "react-toastify"
 //@ts-ignore
 import YouTubePlayer from "youtube-player"
 interface Video{
@@ -133,7 +133,7 @@ export default function StreamView({
     useEffect(()=>{
       // let player =  YouTubePlayer('video-player');
       if(videoPlayerRef.current === null) return;
-      let player =  YouTubePlayer(videoPlayerRef.current);
+      const player =  YouTubePlayer(videoPlayerRef.current);
       
       // 'loadVideoById' is queued until the player is ready to receive API calls.
       player.loadVideoById(currentVideo?.extractedId || "");
