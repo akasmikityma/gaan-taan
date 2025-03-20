@@ -29,9 +29,8 @@ export async function POST(req: NextRequest) {
     }
 
     const res = await ytSearchApi.GetVideoDetails(extractedId);
-
+    console.log("Invalid API response:", res);
     if (!res || !res.title || !res.thumbnail || !res.thumbnail.thumbnails) {
-      console.log("Invalid API response:", res);
       return NextResponse.json({ message: "Invalid video data from YouTube" }, { status: 500 });
     }
 
